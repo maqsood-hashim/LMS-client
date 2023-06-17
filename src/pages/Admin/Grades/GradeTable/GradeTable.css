@@ -1,0 +1,36 @@
+.header-cell {
+   
+    background-color: black;
+    margin-left: 10px;
+   
+  }
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .download-link {
+    display: flex;
+    animation: blink 2s infinite;
+    color: white;
+    text-decoration: none;
+  }
+  
+  
+  .download-link:hover {
+    animation: none;
+    text-decoration: underline;
+    color: gold;
+    cursor: pointer;
+    font-weight: 1000;
+  }
+  icon-download{
+    margin-left: 10px;
+  }

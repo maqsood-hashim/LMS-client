@@ -1,0 +1,11 @@
+.main {
+    display: flex;
+    background-color: #F7F7F7;
+    background-image: url('../../assets/images/air2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+  }
+  .h1{
+ color: #F7F7F7;
+  }

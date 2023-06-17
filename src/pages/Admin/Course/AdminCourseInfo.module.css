@@ -1,0 +1,10 @@
+.main {
+    
+    background-color: #F7F7F7;
+    background-image: url('../../../assets/images/air1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh; /* Set the minimum height to viewport height */
+    width: 100%;
+  }

@@ -1,0 +1,19 @@
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .button-row{
+    display: flex;
+    justify-content: space-around;
+  }
+  .leftSideBar{
+    background-color: #1a202c;/* Dark background color */
+    color: #fff; /* Text color */
+    padding: 20px;
+    height: 100vh;
+  }

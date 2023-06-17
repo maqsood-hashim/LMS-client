@@ -1,0 +1,49 @@
+.sidebarAdmin {
+    background-color: #1a202c; /* Dark background color */
+   padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Set sidebar height to 100% */
+  }
+  
+  .sidebarAdmin a {
+    text-decoration: none;
+    color: #e2e8f0; /* Light text color */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebarAdmin a:hover {
+    background-color: #2d3748; /* Dark shade on hover */
+  }
+  
+  .sidebarAdmin .sidebarLink {
+    margin-left: 10px;
+    color: #a0aec0; /* Light link color */
+  }
+  
+  .sidebarAdmin .sidebarIcon {
+    margin-right: 10px;
+    color: #cbd5e0; /* Light icon color */
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .sidebarAdmin a {
+    animation: fadeIn 0.5s ease;
+    animation-fill-mode: forwards;
+  }
+  
