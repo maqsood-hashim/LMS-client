@@ -100,7 +100,7 @@ const QuestionTable = ({ level, Questiondata, category }) => {
   const getUserInfo = async () => {
 
     try {
-      const response = await fetch(`http://localhost:5000/auth/users`); // Replace '123' with the actual user ID
+      const response = await fetch(`https://kind-blue-coral-hose.cyclic.app/auth/users`); // Replace '123' with the actual user ID
       const data = await response.json();
       // console.log(data.users)
       setUsersData(data.users)
