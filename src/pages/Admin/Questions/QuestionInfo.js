@@ -37,7 +37,7 @@ const [selectedButton, setSelectedButton] = useState();
     
     const getData = ()=>{
       console.log(qlevel)
-      fetch('/get-questions')
+      fetch('https://kind-blue-coral-hose.cyclic.app/get-questions')
         .then(res => res.json())
         .then((data) => { 
           // console.log(data)
