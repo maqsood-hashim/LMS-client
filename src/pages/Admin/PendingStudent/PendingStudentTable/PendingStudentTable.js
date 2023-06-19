@@ -42,7 +42,7 @@ const StudentTable = () => {
   const [data, setData] = useState([]);
 
   const userList = async () => {
-    const user = await Axios.get("/users/student",{
+    const user = await Axios.get("https://kind-blue-coral-hose.cyclic.app/users/student",{
         headers:{
             "Authorization":"Bearer "+localStorage.getItem("auth_token")
         }
@@ -63,7 +63,7 @@ const StudentTable = () => {
  
 
     setData((data) => data.filter((user) => user._id !== id));
-    axios.post('/send-email', { email })
+    axios.post('https://kind-blue-coral-hose.cyclic.app/send-email', { email })
     .then((response) => {
       console.log(response.data);
       // Handle success, e.g., show a success message to the user
@@ -106,7 +106,7 @@ const StudentTable = () => {
         setData((data) => data.filter((user) => user._id !== id));
        
     
-          fetch(`/auth/disapprove/${id}`, {
+          fetch(`https://kind-blue-coral-hose.cyclic.app/auth/disapprove/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
