@@ -138,7 +138,7 @@ const TestInfo = () => {
     // Start Over
     const startOver = () => {
 
-        window.location.href = '/all-courses';
+        window.location.href = '/';
 
         // startTimer();
         // setShowStart(false);
