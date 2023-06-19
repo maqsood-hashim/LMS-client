@@ -39,7 +39,7 @@ const Result = ({ showResult, quizs, marks, startOver, level, category }) => {
                             <h1 className='mb-2 fw-bold'>{marks > (quizs.length * 10 / 2) ? 'Awesome!' : 'Oops!'}</h1>
                             <h3 className='mb-3 fw-bold'>Your score is {marks} out of {quizs.length * 10}</h3>
 
-                            <button onClick={handleStartOver} className='btn py-2 px-4 btn-light fw-bold d-inline'>Back to courses</button>
+                            <button onClick={handleStartOver} className='btn py-2 px-4 btn-light fw-bold d-inline'>Back to home</button>
                         </div>
                     </div>
                 </div>
