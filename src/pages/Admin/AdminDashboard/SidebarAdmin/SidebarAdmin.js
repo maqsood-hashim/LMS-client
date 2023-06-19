@@ -13,11 +13,7 @@ const SidebarAdmin = () => {
   return (
     <div className={Styles.sidebarAdmin}>
       <Sidebar title="Dashboard" link="/admin-dashboard" Icon={DashboardIcon} />
-      // <Sidebar
-      //   title="Course"
-      //   link="/admin/course-info"
-      //   Icon={LocalLibraryIcon}
-      // />
+   
       <Sidebar
         title="Student"
         link="/admin/student-info"
