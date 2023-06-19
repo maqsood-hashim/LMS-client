@@ -29,7 +29,7 @@ const update = ()=>{
       answer: correctOption
     };
     
-    fetch(`/update-questions/${questionId}`, {
+    fetch(`https://kind-blue-coral-hose.cyclic.app/update-questions/${questionId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
