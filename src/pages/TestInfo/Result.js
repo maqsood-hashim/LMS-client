@@ -7,7 +7,7 @@ const Result = ({ showResult, quizs, marks, startOver, level, category }) => {
     const updateMarksOnBackend = async () => {
         try {
             // Make a POST request to update the marks on the backend
-            const response = await axios.post('/addUpdateGrades', 
+            const response = await axios.post('https://kind-blue-coral-hose.cyclic.app/addUpdateGrades', 
             { 
                 student_id:user._id,
                 level:level,
