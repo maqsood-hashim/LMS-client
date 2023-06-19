@@ -62,7 +62,7 @@ const Dashboard = () => {
         <Sidebar Icon={PersonIcon} title="Profile" link="/profile" />
         <Sidebar Icon={Grade} title="Grades" link="/grades" />
         
-        <Sidebar Icon={TouchAppIcon} title="Course" link="/all-courses" />
+        // <Sidebar Icon={TouchAppIcon} title="Course" link="/all-courses" />
         <Sidebar Icon={ExitToAppIcon} title="Logout" />
    
       </div>
