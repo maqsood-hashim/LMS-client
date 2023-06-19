@@ -10,7 +10,7 @@ export const getCourses = (courseInfo) => {
 
 export const fetchCourseInfo = () => {
   return (dispatch) => {
-    Axios.get("/get-courses", {
+    Axios.get("https://kind-blue-coral-hose.cyclic.app/get-courses", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("auth_token"),
       },
@@ -29,7 +29,7 @@ export const fetchCourseInfo = () => {
 export const deleteCourseItem = (courseId) => {
   return (dispatch) => {
     try {
-        fetch("/delete", {
+        fetch("https://kind-blue-coral-hose.cyclic.app/delete", {
             method: "delete",
             headers: {
               Authorization: "Bearer " + localStorage.getItem("auth_token"),
