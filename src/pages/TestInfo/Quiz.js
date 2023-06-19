@@ -15,7 +15,7 @@ const Quiz = ({ time, showQuiz, question, quizs, checkAnswer, correctAnswer, sel
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'flex-end',
-                                    margin: '15px
+                                    margin: '15px'
                                     // Adjust the height as needed
                                 }}>
                                     <ClockIcon style={{ marginRight: '8px' }} />
