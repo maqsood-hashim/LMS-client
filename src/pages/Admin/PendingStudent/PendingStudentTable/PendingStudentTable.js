@@ -68,7 +68,7 @@ const StudentTable = () => {
       console.log(response.data);
       // Handle success, e.g., show a success message to the user
 
-      fetch(`/auth/update-status/${id}`, {
+      fetch(`https://kind-blue-coral-hose.cyclic.app/auth/update-status/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
