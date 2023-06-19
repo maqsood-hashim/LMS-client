@@ -50,7 +50,7 @@ const Register = () => {
     formData.append('profilePicture', courseThumbnail);
     formData.append('id', id);
 
-    fetch("/auth/register", {
+    fetch("https://kind-blue-coral-hose.cyclic.app/auth/register", {
       method: "post",
      
       body:formData
