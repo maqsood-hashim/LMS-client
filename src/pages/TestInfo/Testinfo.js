@@ -31,7 +31,7 @@ const TestInfo = () => {
     useEffect(() => {
         console.log(level)
 
-        fetch(`/get-random-questions?category=${category}&level=${level}`)
+        fetch(`https://kind-blue-coral-hose.cyclic.app/get-random-questions?category=${category}&level=${level}`)
         .then(response => response.json())
         .then(data => {
           // Handle the received questions data
