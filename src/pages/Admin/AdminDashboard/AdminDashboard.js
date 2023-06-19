@@ -23,7 +23,7 @@ const AdminDashboard = () => {
 
   const fetchStatistics = async () => {
     try {
-      const response = await fetch('/auth/stats'); // Update the endpoint URL if necessary
+      const response = await fetch('https://kind-blue-coral-hose.cyclic.app/auth/stats'); // Update the endpoint URL if necessary
       const data = await response.json();
       console.log(data)
       setStatistics(data);
