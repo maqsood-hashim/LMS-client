@@ -64,7 +64,7 @@ const QuestionTable = ({level , Questiondata}) => {
 
  const getData = ()=>{
   console.log(questionLevel)
-  fetch('http://localhost:5000/get-questions')
+  fetch('https://kind-blue-coral-hose.cyclic.app/get-questions')
     .then(res => res.json())
     .then((data) => { 
       // console.log(data)
