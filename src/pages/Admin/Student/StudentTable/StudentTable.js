@@ -36,7 +36,7 @@ const StudentTable = () => {
   const [data, setData] = useState([]);
 
   const userList = async () => {
-    const user = await Axios.get("/users/student", {
+    const user = await Axios.get("https://kind-blue-coral-hose.cyclic.app/users/student", {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("auth_token")
       }
@@ -54,7 +54,7 @@ const StudentTable = () => {
     setData((data) => data.filter((user) => user._id !== id));
          
       
-    fetch(`/auth/disapprove/${id}`, {
+    fetch(`https://kind-blue-coral-hose.cyclic.app/auth/disapprove/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
