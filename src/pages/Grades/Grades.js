@@ -68,7 +68,7 @@ const [selectedButton, setSelectedButton] = useState();
   useEffect(() => {
     const fetchGrades = async () => {
       try {
-        const response = await fetch(`/getStudentGrades/${user._id}`);
+        const response = await fetch(`https://kind-blue-coral-hose.cyclic.app/getStudentGrades/${user._id}`);
         if (response.ok) {
           const data = await response.json();
           console.log(data)
