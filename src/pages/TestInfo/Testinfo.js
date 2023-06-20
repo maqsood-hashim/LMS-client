@@ -1,197 +1,143 @@
 import React, { useEffect, useState } from 'react';
 import Start from './Start';
 import Quiz from './Quiz';
-import TimeUp from './TimeUp'
+import TimeUp from './TimeUp';
 import Result from './Result';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import base from './BaseUrl';
+
 const TestInfo = () => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const level = searchParams.get('level');
-    const category = searchParams.get('category');
-    
-    // All Quizs, Current Question, Index of Current Question, Answer, Selected Answer, Total Marks
-    const [quizs, setQuizs] = useState([]);
-    const [question, setQuesion] = useState({});
-    const [questionIndex, setQuestionIndex] = useState(0);
-    const [correctAnswer, setCorrectAnswer] = useState('');
-    const [selectedAnswer, setSelectedAnswer] = useState('');
-    const [marks, setMarks] = useState(0);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const level = searchParams.get('level');
+  const category = searchParams.get('category');
 
-    // Display Controlling States
-    const [showStart, setShowStart] = useState(true);
-    const [showQuiz, setShowQuiz] = useState(false);
-    const [showResult, setShowResult] = useState(false);
-    const [showTimeup, setshowTimeUp] = useState(false);
-    const [time, setTime] = useState(false);
+  const [quizs, setQuizs] = useState([]);
+  const [question, setQuesion] = useState({});
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [correctAnswer, setCorrectAnswer] = useState('');
+  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [marks, setMarks] = useState(0);
 
-  
+  const [showStart, setShowStart] = useState(true);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [showTimeup, setShowTimeUp] = useState(false);
+  const [time, setTime] = useState(60);
 
-    useEffect(() => {
-        console.log(level)
-
-        fetch(`https://kind-blue-coral-hose.cyclic.app/get-random-questions?category=${category}&level=${level}`)
-        .then(response => response.json())
-        .then(data => {
-          // Handle the received questions data
-          console.log(data);
-          setQuizs(data)})
-        
-        .catch(error => {
-          // Handle the error
-          console.error('Error fetching questions:', error);
-        });
-    
-      
-      
-      
-      
-      
-      
-
-
-
-
-      }, []);
-
-   
-    useEffect(() => {
-        if (quizs.length > questionIndex) {
-            setQuesion(quizs[questionIndex]);
-        }
-    }, [quizs, questionIndex])
-
-    // Start Quiz
-    const startQuiz = () => {
-        setShowStart(false);
-        setShowQuiz(true);
-        setshowTimeUp(false)
+  useEffect(() => {
+    fetch(`${base}/get-random-questions?category=${category}&level=${level}`)
+      .then(response => response.json())
+      .then(data => {
+        setQuizs(data);
         startTimer();
+      })
+      .catch(error => {
+        console.error('Error fetching questions:', error);
+      });
+  }, []);
 
-        // Set the duration of the timer (in seconds)
-        // 1000 milliseconds = 1 second
+  useEffect(() => {
+    if (quizs.length > questionIndex) {
+      setQuesion(quizs[questionIndex]);
     }
+  }, [quizs, questionIndex]);
 
-    const startTimer = ()=>{
-        var duration = 60; // Change this value as needed
+  const startQuiz = () => {
+    setShowStart(false);
+    setShowQuiz(true);
+    setShowTimeUp(false);
+  };
 
-        // Start the timer
-        const timer = setInterval(() => {
-            // Update the timer display (assuming you have a DOM element with id "timer-display")
-            //   const timerDisplay = document.getElementById("timer-display");
-            if (duration > 0) {
-                setTime(duration)
-                // timerDisplay.textContent = `Time remaining: ${duration} seconds`;
-                duration--;
-            } else {
-                showTheResult ();
-                clearInterval(timer);
-                // timerDisplay.textContent = "Time's up!";
-                // Call any function or perform any action when the timer ends
-                // For example, you can automatically submit the quiz here
-            }
-        }, 1000);
+  const startTimer = () => {
+    const timer = setInterval(() => {
+      setTime(prevTime => prevTime - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  };
+
+  useEffect(() => {
+    if (time === 0) {
+      nextQuestion();
     }
+  }, [time]);
 
+  const checkAnswer = (event, selected) => {
+    if (!selectedAnswer) {
+      setCorrectAnswer(question.answer);
+      setSelectedAnswer(selected);
 
-    // Check Answer
-    const checkAnswer = (event, selected) => {
-        if (!selectedAnswer) {
-            setCorrectAnswer(question.answer);
-            setSelectedAnswer(selected);
-
-            if (selected === question.answer) {
-                event.target.classList.add('bg-success');
-                setMarks(marks + 10);
-            } else {
-                event.target.classList.add('bg-danger');
-            }
-        }
+      if (selected === question.answer) {
+        event.target.classList.add('bg-success');
+        setMarks(marks + 10);
+      } else {
+        event.target.classList.add('bg-danger');
+      }
     }
+  };
 
-    // Next Quesion
-    const nextQuestion = () => {
-        setCorrectAnswer('');
-        setSelectedAnswer('');
-        const wrongBtn = document.querySelector('button.bg-danger');
-        wrongBtn?.classList.remove('bg-danger');
-        const rightBtn = document.querySelector('button.bg-success');
-        rightBtn?.classList.remove('bg-success');
-        setQuestionIndex(questionIndex + 1);
+  const nextQuestion = () => {
+    setTime(60);
+    setCorrectAnswer('');
+    setSelectedAnswer('');
+    const wrongBtn = document.querySelector('button.bg-danger');
+    wrongBtn?.classList.remove('bg-danger');
+    const rightBtn = document.querySelector('button.bg-success');
+    rightBtn?.classList.remove('bg-success');
+    setQuestionIndex(prevIndex => prevIndex + 1);
+
+    if (questionIndex + 1 === quizs.length) {
+      showResult();
     }
+  };
 
-    // Show Result
+  const showTimeUp = () => {
+    setShowTimeUp(true);
+    setShowStart(false);
+    setShowQuiz(false);
+  };
 
-    const showTimeUp=()=>{
-        setshowTimeUp(true)
-        setShowStart(false);
-        setShowQuiz(false);
-       
-    }
-    const showTheResult = () => {
-        setShowResult(true);
-        setShowStart(false);
-        setShowQuiz(false);
-    }
+  const showTheResult = () => {
+    setShowResult(true);
+    setShowStart(false);
+    setShowQuiz(false);
+  };
 
-    // Start Over
-    const startOver = () => {
+  const startOver = () => {
+    window.location.href = '/all-courses';
+  };
 
-        window.location.href = '/';
+  return (
+    <>
+      <Start startQuiz={startQuiz} showStart={showStart} />
 
-        // startTimer();
-        // setShowStart(false);
-        // setShowResult(false);
-        // setshowTimeUp(false);
-        // setShowQuiz(true);
-        // setCorrectAnswer('');
-        // setSelectedAnswer('');
-        // setQuestionIndex(0);
-        // setMarks(0);
-        // const wrongBtn = document.querySelector('button.bg-danger');
-        // wrongBtn?.classList.remove('bg-danger');
-        // const rightBtn = document.querySelector('button.bg-success');
-        // rightBtn?.classList.remove('bg-success');
-    }
+      <Quiz
+        time={time}
+        showQuiz={showQuiz}
+        question={question}
+        quizs={quizs}
+        checkAnswer={checkAnswer}
+        correctAnswer={correctAnswer}
+        selectedAnswer={selectedAnswer}
+        questionIndex={questionIndex}
+        nextQuestion={nextQuestion}
+        showTheResult={showTheResult}
+      />
 
-    return (
-        <>
-            {/* Welcome Page */}
-            <Start
-                startQuiz={startQuiz}
-                showStart={showStart}
-            />
-            
-
-
-            {/* Quiz Page */}
-            <Quiz
-              time = {time}
-                showQuiz={showQuiz}
-                question={question}
-                quizs={quizs}
-                checkAnswer={checkAnswer}
-                correctAnswer={correctAnswer}
-                selectedAnswer={selectedAnswer}
-                questionIndex={questionIndex}
-                nextQuestion={nextQuestion}
-                showTheResult={showTheResult}
-            />
-
-            {/* Result Page */}
-            <Result
-               level ={level}
-               category = {category}
-                showResult={showResult}
-                quizs={quizs}
-                marks={marks}
-                startOver={startOver} />
-
-
-
-        </>
-    );
-}
+      <Result
+        level={level}
+        category={category}
+        showResult={showResult}
+        quizs={quizs}
+        marks={marks}
+        startOver={startOver}
+      />
+    </>
+  );
+};
 
 export default TestInfo;
